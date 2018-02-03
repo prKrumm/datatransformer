@@ -21,6 +21,9 @@ namespace DataTransformer.Model
         public string BeschreibungDeutsch { get; set; }
         public EbayArtikel ebayArtikel { get; set; }
         public List<Kategorie> katListe { get; set; }
+        public string weitereArtNr { get; set; }
+        public string ArtNr { get; set; }
+
 
 
 

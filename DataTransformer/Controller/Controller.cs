@@ -144,6 +144,18 @@ namespace DataTransformer.Controller
             sb.AppendLine("Artikelnummer;Attributwert;Attributname");
             for (int i = 0; i < artikelList.Count; i++)
             {
+                if (artikelList[i].ArtNr != null)
+                {
+                    //attr1 -> ArtikelNummer
+                    sb.AppendLine(artikelList[i].SKU + ";" + artikelList[i].ArtNr + ";attr1");
+                }
+
+                if (artikelList[i].weitereArtNr != null)
+                {
+                    //attr2 -> Weitere ArtikelNummer
+                    sb.AppendLine(artikelList[i].SKU + ";" + artikelList[i].weitereArtNr + ";attr2");
+                }
+
                 //attr4 -> VersandInland
                 sb.AppendLine(artikelList[i].SKU + ";" + artikelList[i].ebayArtikel.VersandInland + ";attr4");
                 //attr5 -> VersandAusland
@@ -395,7 +407,11 @@ namespace DataTransformer.Controller
                 //artikelList[i].BeschreibungDeutsch = Regex.Replace(artikelList[i].BeschreibungDeutsch, "</o:p>", "");
 
                 artikelList[i].BeschreibungDeutsch = Regex.Replace(artikelList[i].BeschreibungDeutsch, "<b>", "");
-               // artikelList[i].BeschreibungDeutsch = Regex.Replace(artikelList[i].BeschreibungDeutsch, "<b .*?>", "");
+                artikelList[i].BeschreibungDeutsch = Regex.Replace(artikelList[i].BeschreibungDeutsch, "<b >", "");
+                artikelList[i].BeschreibungDeutsch = Regex.Replace(artikelList[i].BeschreibungDeutsch, "<b  >", "");
+                artikelList[i].BeschreibungDeutsch = Regex.Replace(artikelList[i].BeschreibungDeutsch, "<strong>", "");
+                artikelList[i].BeschreibungDeutsch = Regex.Replace(artikelList[i].BeschreibungDeutsch, "</strong>", "");
+                // artikelList[i].BeschreibungDeutsch = Regex.Replace(artikelList[i].BeschreibungDeutsch, "<b .*?>", "");
                 //artikelList[i].BeschreibungDeutsch = Regex.Replace(artikelList[i].BeschreibungDeutsch, "<b  .*?>", "");
                 artikelList[i].BeschreibungDeutsch = Regex.Replace(artikelList[i].BeschreibungDeutsch, "</b>", "");
 

@@ -65,6 +65,43 @@ namespace DataTransformer.Data
                         }
                     }
 
+
+                    SqlCommand cmd2 = new SqlCommand("select a.cArtNr,a.kArtikel,s.kSprache,s.cWert, merk.kMerkmal, merk.kMerkmalWert " +
+                        "from tMerkmalWertSprache s, tArtikelMerkmal merk,tArtikel a where a.kArtikel=merk.kArtikel AND" +
+                        " merk.kMerkmalWert=s.kMerkmalWert AND merk.kMerkmal=21 AND s.kSprache=1 AND a.cArtNr=@sku2", conn);
+                    cmd2.Parameters.AddWithValue("@sku2", a.SKU);
+                    using (SqlDataReader reader = cmd2.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            a.weitereArtNr = reader.GetString(3);
+
+                            Console.WriteLine("Weitere ArtikelNr from Ebay: " + a.weitereArtNr);
+                        }
+                    }
+
+
+                    SqlCommand cmd3 = new SqlCommand("select a.cArtNr,a.kArtikel,s.kSprache,s.cWert, merk.kMerkmal, merk.kMerkmalWert " +
+                        "from tMerkmalWertSprache s, tArtikelMerkmal merk,tArtikel a where a.kArtikel=merk.kArtikel AND" +
+                        " merk.kMerkmalWert=s.kMerkmalWert AND merk.kMerkmal=2 AND s.kSprache=1 AND a.cArtNr=@sku3", conn);
+                    cmd3.Parameters.AddWithValue("@sku3", a.SKU);
+                    using (SqlDataReader reader = cmd3.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            a.ArtNr = reader.GetString(3);
+
+                            Console.WriteLine("ArtikelNr from Ebay: " + a.ArtNr);
+                        }
+                    }
+
+
+
+
+
+
                 }
 
             }
